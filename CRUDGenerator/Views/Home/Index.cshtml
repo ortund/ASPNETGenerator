@@ -1,0 +1,47 @@
+﻿@model List<CRUDGenerator.Models.ResultPage>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row">
+    <p>Here generated is a set of CRUD page boilerplates for your provided class. These are not meant to be used as a final product, but to take out most of the work involved in putting them together yourself.</p>
+    <p>The code may not look great here but it'll format properly when you copy it to Visual Studio.</p>
+    @foreach (var m in Model)
+    {
+        <div class="col-md-6" style="border-left: 1px solid #b6bcc6;">
+            <div class="row">
+                <span></span>
+                <div class="col-md-8"><h2>@m.Name</h2></div>
+            </div>
+            <pre class="@m.Name.Replace(".", "_")">@m.Code.Replace("\t", "    ")</pre>
+        </div>
+    }
+</div>
+<script>
+    //$("button").on("click", function () {
+    //    var ele = $("pre." + $(this).attr("id"));
+    //    ele.select();
+    //    document.execCommand("copy");
+
+    //    var msg = $(ele).prev("span");
+    //    msg.html("Copied to clipboard!");
+    //    msg.fadeOut(1000);
+    //});
+    $("button#select").on("click", function() {
+        var c = $(this).class();
+        var element = $("pre." + c);
+        $("body").append($temp);
+        $temp.val(element.text()).select();
+    });
+    function copyCode(element)
+    {
+        var $temp = $("<input>");
+        $("body").append($temp);
+        $temp.val($(element).text()).select();
+        document.execCommand("copy");
+        $temp.remove();
+        var msg = $(element).prev("span");
+        msg.html("Copied to clipboard!");
+        msg.fadeOut(1000);
+    }
+</script>
