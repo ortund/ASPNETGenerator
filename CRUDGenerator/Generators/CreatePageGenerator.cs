@@ -21,9 +21,13 @@ namespace CRUDGenerator
             sb.AppendLine("private readonly ApplicationDbContext context = new ApplicationDbContext();");
             sb.AppendLine("protected void Page_Load(object sender, EventArgs e)");
             sb.AppendLine("{");
-            sb.AppendLine("	");
+            sb.AppendLine(string.Empty);
             sb.AppendLine("}");
-            sb.AppendLine("");
+            sb.AppendLine("protected void Page_LoadComplete(object sender, EventArgs e)");
+            sb.AppendLine("{");
+            sb.AppendLine("    this.context.Dispose();");
+            sb.AppendLine("}");
+            sb.AppendLine(string.Empty);
             sb.AppendLine("protected async void SaveButton_Click(object sender, EventArgs e)");
             sb.AppendLine("{");
             sb.AppendLine("	try");
@@ -36,8 +40,8 @@ namespace CRUDGenerator
             sb.AppendLine("		ErrorLabel.Text = ex.Message;");
             sb.AppendLine("	}");
             sb.AppendLine("}");
-            sb.AppendLine("");
-            sb.AppendLine($"private async Task Save{className}()");
+            sb.AppendLine(string.Empty);
+            sb.AppendLine($"private async Task<int> Save{className}()");
             sb.AppendLine("{");
             sb.AppendLine("	// Better to refactor this so that the value assignments are done in the constructor");
             sb.AppendLine("	// but the current version of the generator isn't smart enough for that.");
@@ -49,21 +53,22 @@ namespace CRUDGenerator
             foreach (var property in type.GetProperties())
             {
                 if (property.PropertyType == typeof(string))
-                    sb.AppendLine($"var {property.Name.ToLower()} = {property.Name}TextBox.Text;");
+                    sb.AppendLine($"	var {property.Name.ToLower()} = {property.Name}TextBox.Text;");
                 else if (property.PropertyType == typeof(int))
-                    sb.AppendLine("int.TryParse({property.Name}TextBox.Text, out int {property.Name.ToLower()});");
+                    sb.AppendLine("	int.TryParse({property.Name}TextBox.Text, out int {property.Name.ToLower()});");
                 else if (property.PropertyType == typeof(DateTime))
-                    sb.AppendLine($"DateTime.TryParse({property.Name}DateTimePicker.SelectedDate.ToString(), out DateTime {property.Name.ToLower()});");
+                    sb.AppendLine($"	DateTime.TryParse({property.Name}DateTimePicker.SelectedDate.ToString(), out DateTime {property.Name.ToLower()});");
                 else
-                    sb.AppendLine($"var {property.Name.ToLower()} = {property.Name}TextBox.Text;");
+                    sb.AppendLine($"	var {property.Name.ToLower()} = {property.Name}TextBox.Text;");
             }
 
             sb.AppendLine($"	var {objectsVar} = new {className}();");
             foreach (var property in type.GetProperties())
-                sb.AppendLine($"{objectsVar}.{property.Name} = {property.Name.ToLower()};");
+                sb.AppendLine($"	{objectsVar}.{property.Name} = {property.Name.ToLower()};");
 
             sb.AppendLine($"	context.{className}s.Add({objectsVar});");
             sb.AppendLine("	await context.SaveChangesAsync();");
+            sb.AppendLine($"	{objectsVar}.Id;");
             sb.AppendLine("}");
 
             codeFile.Code = sb.ToString();
@@ -100,30 +105,35 @@ namespace CRUDGenerator
             sb.AppendLine("					<div class=\"panel-body\">");
             sb.AppendLine("						<div class=\"row\">");
             sb.AppendLine("							<asp:Label runat=\"server\" ID=\"ErrorLabel\" ForeColor=\"Red\" />");
+            sb.AppendLine("							<div class=\"form-horizontal\">");
             foreach (var property in type.GetProperties())
             {
-                sb.AppendLine("							<div class=\"form-group\">");
-                sb.AppendLine($"							    <label class=\"col-md-2 control-label\">{property.Name}</label>");
-                sb.AppendLine("							    <div class=\"col-md-4\">");
+                sb.AppendLine("								<div class=\"form-group\">");
+                sb.AppendLine($"								    <label class=\"col-md-2 control-label\">{property.Name}</label>");
+                sb.AppendLine("								    <div class=\"col-md-4\">");
                 if (property.PropertyType == typeof(string))
                 {
-                    sb.AppendLine($"							        <asp:TextBox runat=\"server\" ID=\"{property.Name}TextBox\" CssClass=\"form-control\" />");
+                    sb.AppendLine($"								        <asp:TextBox runat=\"server\" ID=\"{property.Name}TextBox\" CssClass=\"form-control\" />");
                 }
                 else if (property.PropertyType == typeof(int))
                 {
-                    sb.AppendLine($"							        <asp:TextBox runat=\"server\" ID=\"{property.Name}TextBox\" CssClass=\"form-control\" TextMode=\"Number\" />");
+                    sb.AppendLine($"								        <asp:TextBox runat=\"server\" ID=\"{property.Name}TextBox\" CssClass=\"form-control\" TextMode=\"Number\" />");
                 }
                 else if (property.PropertyType == typeof(DateTime))
                 {
-                    sb.AppendLine($"							        <telerik:RadDateTimePicker runat=\"server\" ID=\"{property.Name}DateTimePicker\" CssClass=\"form-control\" />");
+                    sb.AppendLine($"								        <telerik:RadDateTimePicker runat=\"server\" ID=\"{property.Name}DateTimePicker\" CssClass=\"form-control\" />");
                 }
                 else
                 {
-                    sb.AppendLine($"							        <asp:TextBox runat=\"server\" ID=\"{property.Name}TextBox\" CssClass=\"form-control\" />");
+                    sb.AppendLine($"								        <asp:TextBox runat=\"server\" ID=\"{property.Name}TextBox\" CssClass=\"form-control\" />");
                 }
-                sb.AppendLine("							    </div>");
-                sb.AppendLine("							</div>");
+                sb.AppendLine("								    </div>");
+                sb.AppendLine("								</div>");
             }
+            sb.AppendLine("								<div class=\"col-md-10 offset-md-2\">");
+            sb.AppendLine("				    				<asp:Button runat=\"server\" ID=\"SaveButton\" CssClass=\"btn btn-primary\" Text=\"Save\" OnClick=\"SaveButton_Click\" />");
+            sb.AppendLine("								</div>");
+            sb.AppendLine("							</div");
             sb.AppendLine("						</div>");
             sb.AppendLine("					</div>");
             sb.AppendLine("				</div>");

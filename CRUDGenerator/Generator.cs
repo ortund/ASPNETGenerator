@@ -36,8 +36,6 @@ namespace CRUDGenerator
             };
         }
 
-
-
         public static List<ResultPage> GetEditFiles(Type type)
         {
             var className = type.Name;

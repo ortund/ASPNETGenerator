@@ -17,11 +17,11 @@ namespace CRUDGenerator.Controllers
             var model = typeof(License);
             var defaultFiles = Generator.GetDefaultFiles(model);
             var createFiles = Generator.GetCreateFiles(model);
-            //var editFiles = Generator.GetEditFiles();
+            var editFiles = Generator.GetEditFiles(model);
 
             foreach (var file in defaultFiles) files.Add(file);
             foreach (var file in createFiles) files.Add(file);
-            //foreach (var file in editFiles) files.Add(file);
+            foreach (var file in editFiles) files.Add(file);
 
             return View(files);
         }

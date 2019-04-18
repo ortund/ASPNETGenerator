@@ -5,7 +5,6 @@ C:\Users\logan\source\repos\CRUDGenerator\CRUDGenerator\bin\Debug\netcoreapp2.2\
 C:\Users\logan\source\repos\CRUDGenerator\CRUDGenerator\bin\Debug\netcoreapp2.2\CRUDGenerator.pdb
 C:\Users\logan\source\repos\CRUDGenerator\CRUDGenerator\bin\Debug\netcoreapp2.2\CRUDGenerator.Views.dll
 C:\Users\logan\source\repos\CRUDGenerator\CRUDGenerator\bin\Debug\netcoreapp2.2\CRUDGenerator.Views.pdb
-C:\Users\logan\source\repos\CRUDGenerator\CRUDGenerator\obj\Debug\netcoreapp2.2\CRUDGenerator.csprojResolveAssemblyReference.cache
 C:\Users\logan\source\repos\CRUDGenerator\CRUDGenerator\obj\Debug\netcoreapp2.2\CRUDGenerator.csproj.CoreCompileInputs.cache
 C:\Users\logan\source\repos\CRUDGenerator\CRUDGenerator\obj\Debug\netcoreapp2.2\CRUDGenerator.RazorAssemblyInfo.cache
 C:\Users\logan\source\repos\CRUDGenerator\CRUDGenerator\obj\Debug\netcoreapp2.2\CRUDGenerator.RazorAssemblyInfo.cs
@@ -28,3 +27,4 @@ C:\Users\logan\source\repos\CRUDGenerator\CRUDGenerator\obj\Debug\netcoreapp2.2\
 C:\Users\logan\source\repos\CRUDGenerator\CRUDGenerator\obj\Debug\netcoreapp2.2\CRUDGenerator.dll
 C:\Users\logan\source\repos\CRUDGenerator\CRUDGenerator\obj\Debug\netcoreapp2.2\CRUDGenerator.pdb
 C:\Users\logan\source\repos\CRUDGenerator\CRUDGenerator\obj\Debug\netcoreapp2.2\CRUDGenerator.csproj.CopyComplete
+C:\Users\logan\source\repos\CRUDGenerator\CRUDGenerator\obj\Debug\netcoreapp2.2\CRUDGenerator.csprojAssemblyReference.cache

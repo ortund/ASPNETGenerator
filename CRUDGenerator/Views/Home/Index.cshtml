@@ -8,6 +8,10 @@
     <p>The code may not look great here but it'll format properly when you copy it to Visual Studio.</p>
     @foreach (var m in Model)
     {
+        var parms = new Dictionary<string, string>
+        {
+            { "page", m.Name }
+        };
         <div class="col-md-6" style="border-left: 1px solid #b6bcc6;">
             <div class="row">
                 <span></span>

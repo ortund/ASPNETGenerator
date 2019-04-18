@@ -31,6 +31,10 @@ namespace CRUDGenerator
             sb.AppendLine("		ErrorLabel.Text = ex.Message;");
             sb.AppendLine("	}");
             sb.AppendLine("}");
+            sb.AppendLine("protected void Page_LoadComplete(object sender, EventArgs e)");
+            sb.AppendLine("{");
+            sb.AppendLine("    this.context.Dispose();");
+            sb.AppendLine("}");
             sb.AppendLine(string.Empty);
             sb.AppendLine($"private void Load{className}s(int pageNumber = 0)");
             sb.AppendLine("{");
