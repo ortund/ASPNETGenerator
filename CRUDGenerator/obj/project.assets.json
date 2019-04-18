@@ -12936,11 +12936,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\logan\\source\\repos\\CRUDGenerator\\CRUDGenerator\\CRUDGenerator.csproj",
+      "projectUniqueName": "C:\\Users\\logan\\aspnetgenerator\\CRUDGenerator\\CRUDGenerator.csproj",
       "projectName": "CRUDGenerator",
-      "projectPath": "C:\\Users\\logan\\source\\repos\\CRUDGenerator\\CRUDGenerator\\CRUDGenerator.csproj",
+      "projectPath": "C:\\Users\\logan\\aspnetgenerator\\CRUDGenerator\\CRUDGenerator.csproj",
       "packagesPath": "C:\\Users\\logan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\logan\\source\\repos\\CRUDGenerator\\CRUDGenerator\\obj\\",
+      "outputPath": "C:\\Users\\logan\\aspnetgenerator\\CRUDGenerator\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

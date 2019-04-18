@@ -8,10 +8,6 @@
     <p>The code may not look great here but it'll format properly when you copy it to Visual Studio.</p>
     @foreach (var m in Model)
     {
-        var parms = new Dictionary<string, string>
-        {
-            { "page", m.Name }
-        };
         <div class="col-md-6" style="border-left: 1px solid #b6bcc6;">
             <div class="row">
                 <span></span>
@@ -21,16 +17,7 @@
         </div>
     }
 </div>
-<script>
-    //$("button").on("click", function () {
-    //    var ele = $("pre." + $(this).attr("id"));
-    //    ele.select();
-    //    document.execCommand("copy");
-
-    //    var msg = $(ele).prev("span");
-    //    msg.html("Copied to clipboard!");
-    //    msg.fadeOut(1000);
-    //});
+@*<script>
     $("button#select").on("click", function() {
         var c = $(this).class();
         var element = $("pre." + c);
@@ -48,4 +35,4 @@
         msg.html("Copied to clipboard!");
         msg.fadeOut(1000);
     }
-</script>
+</script>*@
