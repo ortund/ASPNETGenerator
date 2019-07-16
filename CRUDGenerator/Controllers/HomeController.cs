@@ -14,21 +14,6 @@ namespace CRUDGenerator.Controllers
         {
             return View();
         }
-        //public IActionResult Index()
-        //{
-        //    var files = new List<ResultPage>();
-
-        //    var model = typeof(License);
-        //    var defaultFiles = Generator.GetDefaultFiles(model);
-        //    var createFiles = Generator.GetCreateFiles(model);
-        //    var editFiles = Generator.GetEditFiles(model);
-
-        //    foreach (var file in defaultFiles) files.Add(file);
-        //    foreach (var file in createFiles) files.Add(file);
-        //    foreach (var file in editFiles) files.Add(file);
-
-        //    return View(files);
-        //}
 
         public IActionResult Privacy()
         {
