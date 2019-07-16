@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewData["Title"] = "Sorting";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Sorting the Data</h1>
+<p>
+    While LINQ provides the OrderBy, OrderByDescending, Skip and Take methods, using this does complicate the issue of sorting data correctly.<br />
+    For that reason, I've written the following extension methods in the &lt;project&gt;.Extensions namespace.
+</p>
+
+<p>
+    This adds the .SortDataBy() method to the IQueryable as shown (would've been an overload for the existing SortBy but the signatures wouldn't allow that).
+</p>
+
+<pre><code class="card-subtitle hljs">
+public static class CollectionExtensions
+{
+	public static IQueryable<T> SortDataBy<T>(this IQueryable<T> source, string property)
+	{
+		if (source == null)
+		{
+			throw new ArgumentNullException(nameof(source));
+		}
+			
+		var descIndex = property.IndexOf(" DESC");
+		if (descIndex >= 0)
+		{
+			property = property.Substring(0, descIndex).Trim();
+		}
+		else
+		{
+			var ascIndex = property.IndexOf(" ASC");
+			property = property.Substring(0, ascIndex).Trim();
+		}
+			
+		if (string.IsNullOrEmpty(property))
+		{
+			return source;
+		}
+			
+		var parameter = Expression.Parameter(source.ElementType, string.Empty);
+		var p = Expression.Property(parameter, property);
+		var lambda = Expression.Lambda(p, parameter);
+			
+		var method = (descIndex < 0) ? "OrderBy" : "OrderByDescending";
+			
+		var expressionCall = Expression.Call(typeof(Queryable), method,
+			new Type[] { source.ElementType, p.Type },
+			source.Expression, Expression.Quote(lambda));
+				
+		return sourec.Provider.CreateQuery<T>(expressionCall);
+	}
+}
+</code></pre>

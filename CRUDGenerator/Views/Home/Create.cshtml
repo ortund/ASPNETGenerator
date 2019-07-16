@@ -1,0 +1,25 @@
+﻿@model List<CRUDGenerator.Models.ResultPage>
+@{
+    ViewData["Title"] = "Create Page Code";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewData["Title"].ToString()</h1>
+<p>
+    Create and Edit pages use <a href="https://fontawesome.com/icons" target="_blank">FontAwesome icons</a> so you should probably make sure you have these added to your project if you're going to use this code.
+</p>
+
+@foreach (var m in Model)
+{
+    <div class="col-sm" style="border-left: 1px solid #b6bcc6;">
+        <h2>@m.Name</h2>
+        @if (m.Name.EndsWith("aspx"))
+        {
+            <pre><code class="html hljs">@m.Code.Replace("\t", "    ")</code></pre>
+        }
+        else
+        {
+            <pre><code class="cs hljs">@m.Code.Replace("\t", "    ")</code></pre>
+        }
+    </div>
+}

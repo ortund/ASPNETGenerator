@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewData["Title"] = "Get Started Using This";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewData["Title"].ToString()</h1>
+
+<p>
+    The concept is simple: define a model for the object you're going to be manipulating on the forms.<br />
+    So when you download this, you'll find a file in the Models folder called TargetModel.cs. This is where you're going to define your model.
+</p><p>
+    I don't recommend going too crazy with your model definition because I'm fucking busy and I havne't had time to make this much smarter than I needed for my own projects when I started writing this system. That means its not going to do things like render more complicated controls - yet. I'll get there eventually but for now there are limitation.
+</p>
+
+<h3>Limitations</h3>
+<p>
+    These are pretty much things I'm getting to but currently haven't added in yet.
+</p>
+<ul>
+    <li>It won't render DropDownLists yet.</li>
+    <li>It won't render CheckBoxes yet - fuck CheckBoxLists though. If you wanna add that shit, be my guest, but let me know first so I can add you to the project as a contributor.</li>
+    <li>RadioButtons or RadioButtonLists are also a no-go.</li>
+</ul>
+
+<p>
+    That's all I can think of right now. Its late and I'm tired. Shut up.<br />
+    On a serious note, if you want to do anything that the system isn't specifically written to cater for, it'll just output a textbox. This may be sub optimal for your specific requirement - I don't care.
+</p>
+
+<p>
+    For now, the generator basically just outputs ASP TextBox controls anyway. If the property on your model is an int, it'll give you a TexBox with TextMode="Number".<br />
+    DateTime is a data type I use quite a lot so I made sure to cater for that. Awesome right? The system will generate markup for a <a href="https://demos.telerik.com/aspnet-ajax/datetimepicker/overview/defaultcs.aspx" target="_blank">Telerik RadDateTimePicker control</a>.
+</p>
+
+<h3>Summary</h3>
+<p>
+    So if you're going to use this generator I made, you need to define your data model in Models\TargetModel.cs as the basis for your form fields.<br />
+    Keep it simple because the generator doesn't really cater for much right now.
+</p>
+<p>
+    Here's a bonus tip because I'm not a total cunt: don't change the name of the class defined in TargetModel.cs'. That way you don't have to go into the controllers and change anything there - it's just less work.
+</p>
+<p>
+    Enjoy using this I guess or don't; whatever.
+</p>

@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewData["Title"] = "Progress";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Progress</h1>
+<p>
+    NOTE: Ironically, this is still in progress. I haven't finished with the CSS yet, shut up.<br />
+    The progress spinner uses a <a href="https://fontawesome.com/icons" target="_blank">FontAwesome icon</a> and CSS to animate it through 360&deg;. There's also CSS here for the modal window this appears on but it may or may not work as intended depending on the structure of your pages.
+</p>
+<p>
+    This markup is typically used in a UserControl which gets added to the page.
+</p>
+<div class="col-md-6" style="border-left: 1px solid #b6bcc6;">
+    <h2>Markup</h2>
+    <pre><code class="html hljs">&lt;div class="generatedModal"&gt;
+    &lt;div class="centerModal text-info"&gt;
+        &lt;i class="fas fa-spinner"&gt;&lt;/i&gt;&lt;br /&gt;
+        Working...
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+</div>
+
+<div class="col-md-6" style="border-left: 1px solid #b6bcc6;">
+    <h2>Stylesheet</h2>
+    <pre><code class="css hljs">.generatedModal {
+    position: fixed;
+    z-index: 9999;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.centerModal {
+    text-align: center;
+    z-index: 10000;
+    margin: 300px auto;
+    padding: 10px;
+    width: 130px;
+    border: 1px solid #000;
+}
+    .generatedModal i {
+        font-size: 20px;
+        -webkit-animation: spin 4s linear infinite;
+        -moz-animation: spin 4s linear infinite;
+        animation: spin 4s linear infinite;
+    }
+
+&#64;-moz-keyframes spin {
+    100% {
+        -moz-transform: rotate(360deg);
+    }
+}
+
+&#64;-webkit-keyframes spin {
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+&#64;keyframes spin {
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}</code></pre>
+</div>
+

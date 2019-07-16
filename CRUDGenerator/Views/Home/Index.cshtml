@@ -1,38 +1,36 @@
-﻿@model List<CRUDGenerator.Models.ResultPage>
-@{
+﻿@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="row">
-    <p>Here generated is a set of CRUD page boilerplates for your provided class. These are not meant to be used as a final product, but to take out most of the work involved in putting them together yourself.</p>
-    <p>The code may not look great here but it'll format properly when you copy it to Visual Studio.</p>
-    @foreach (var m in Model)
-    {
-        <div class="col-md-6" style="border-left: 1px solid #b6bcc6;">
-            <div class="row">
-                <span></span>
-                <div class="col-md-8"><h2>@m.Name</h2></div>
-            </div>
-            <pre class="@m.Name.Replace(".", "_")">@m.Code.Replace("\t", "    ")</pre>
-        </div>
-    }
+    <h2>What's this about?</h2>
+    <p>
+        I still do a lot of work at my job in ASPX Web Forms and it got really time consuming to actually go and manually build each form on every page. There's just so much that's so repetitive about it (as you'll see here) that in most cases, I realised I could just copy from page to page without losing a lot of functionality. So I figured, why go through that when I basically write code to do it for me; you know, seeing as how ASPX Web Forms doesn't have View Scaffolding from Model the way later tech like MVC does).
+    </p>
+    <p>
+        Since this is mostly a project for my own benefit, I've taken a more casual approach to wording and such; yes it's on my portfolio but it's not really intended as anything more than a way for me to be lazy. For this reason, the writing on this site is a little more colorful than you'd expect to see in a strictly professional system.
+    </p>
+    <p>
+        If you're here because you'd like to use this to generate your own forms, you probably need to rethink your life choices. I'm under contractual obligation to use this ancient technology; what's your excuse? Anyway I suppose you probably want to know how to do it right? Well fuck off over to <a asp-area="" asp-controller="Home" asp-action="GetStarted">Get Started</a>. I already explained it there.
+    </p>
+    <h2>Changes:</h2>
+    <ul>
+        <li>
+            <b>07/16/2019</b>
+            <ul>
+                <li>
+                    Forced users to exercise their mouse hand more by moving code to their individual pages. Oh right, this also provided some more clarity about what code was being copied.
+                </li>
+                <li>
+                    Was naughty in the previous build and kinda made the whole concept of Dependency Injection cry because ASPX doesn't really let you do it right. So I've been a good boy now and I went back to the traditional model of creating a using block for every DbContext I needed. Entity Framework liked this and stopped throwing slippery errors down my pants when I wasn't looking.
+                </li>
+                <li>
+                    Made it prettier with some syntax highlighting. Its kind of like shiny things but with code.
+                </li>
+                <li>
+                    Also updated this page to a list of things I changed, in case you couldn't tell.
+                </li>
+            </ul>
+        </li>
+    </ul>
 </div>
-@*<script>
-    $("button#select").on("click", function() {
-        var c = $(this).class();
-        var element = $("pre." + c);
-        $("body").append($temp);
-        $temp.val(element.text()).select();
-    });
-    function copyCode(element)
-    {
-        var $temp = $("<input>");
-        $("body").append($temp);
-        $temp.val($(element).text()).select();
-        document.execCommand("copy");
-        $temp.remove();
-        var msg = $(element).prev("span");
-        msg.html("Copied to clipboard!");
-        msg.fadeOut(1000);
-    }
-</script>*@

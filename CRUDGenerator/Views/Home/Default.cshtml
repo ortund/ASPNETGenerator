@@ -1,0 +1,29 @@
+﻿@model List<CRUDGenerator.Models.ResultPage>
+@{
+    ViewData["Title"] = "Data List Code";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewData["Title"].ToString()</h1>
+<p>
+    The Gridview is pretty much fully featured, but frankly, all this inline editing of data on the actual Gridview is too fiddly for my liking and it requires far too much repetitive bullshit that I don't want to type out. That's pretty much the reason why this generator builds create and edit pages. Also because using separate pages like this gives you a lot more flexibility in allowing you to select related data from DropDownLists and such.
+</p>
+<p>
+    To see how to get the sorting working properly, check out <a asp-area="" asp-controller="Home" asp-action="Sorting">Sorting</a>.
+</p>
+
+@foreach (var m in Model)
+{
+    <div class="col-sm" style="border-left: 1px solid #b6bcc6;">
+        <h2>@m.Name</h2>
+        @if (m.Name.EndsWith("aspx"))
+        {
+            <pre><code class="html hljs">@m.Code.Replace("\t", "    ")</code></pre>
+        }
+        else
+        {
+            <pre><code class="cs hljs">@m.Code.Replace("\t", "    ")</code></pre>
+        }
+    </div>
+}
+

@@ -18,21 +18,14 @@ namespace CRUDGenerator
                 Name = "Create.aspx.cs"
             };
             var sb = new StringBuilder();
-            sb.AppendLine("private readonly ApplicationDbContext context = new ApplicationDbContext();");
             sb.AppendLine("protected void Page_Load(object sender, EventArgs e)");
             sb.AppendLine("{");
-            sb.AppendLine(string.Empty);
-            sb.AppendLine("}");
-            sb.AppendLine("protected void Page_LoadComplete(object sender, EventArgs e)");
-            sb.AppendLine("{");
-            sb.AppendLine("    this.context.Dispose();");
-            sb.AppendLine("}");
             sb.AppendLine(string.Empty);
             sb.AppendLine("protected async void SaveButton_Click(object sender, EventArgs e)");
             sb.AppendLine("{");
             sb.AppendLine("	try");
             sb.AppendLine("	{");
-            sb.AppendLine($"		await Save{className}();");
+            sb.AppendLine($"		await Save{className}Async();");
             sb.AppendLine("		Response.Redirect(\"Default\");");
             sb.AppendLine("	}");
             sb.AppendLine("	catch (Exception ex)");
@@ -41,7 +34,7 @@ namespace CRUDGenerator
             sb.AppendLine("	}");
             sb.AppendLine("}");
             sb.AppendLine(string.Empty);
-            sb.AppendLine($"private async Task<int> Save{className}()");
+            sb.AppendLine($"private async Task<int> Save{className}Async()");
             sb.AppendLine("{");
             sb.AppendLine("	// Better to refactor this so that the value assignments are done in the constructor");
             sb.AppendLine("	// but the current version of the generator isn't smart enough for that.");
@@ -66,9 +59,12 @@ namespace CRUDGenerator
             foreach (var property in type.GetProperties())
                 sb.AppendLine($"	{objectsVar}.{property.Name} = {property.Name.ToLower()};");
 
-            sb.AppendLine($"	context.{className}s.Add({objectsVar});");
-            sb.AppendLine("	await context.SaveChangesAsync();");
-            sb.AppendLine($"	{objectsVar}.Id;");
+            sb.AppendLine("    using (var context = new ApplicationDbContext())");
+            sb.AppendLine("    {");
+            sb.AppendLine($"        context.{className}s.Add({objectsVar});");
+            sb.AppendLine("         await context.SaveChangesAsync();");
+            sb.AppendLine("    }");
+            sb.AppendLine($"	return {objectsVar}.Id;");
             sb.AppendLine("}");
 
             codeFile.Code = sb.ToString();
